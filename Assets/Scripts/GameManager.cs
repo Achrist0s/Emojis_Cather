@@ -17,9 +17,14 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else
+        {
             Destroy(gameObject);
+        }
     }
 
     void Start()
@@ -52,7 +57,6 @@ public class GameManager : MonoBehaviour
         IsGameActive = true;
         timer = gameTime;
         score = 0;
-
         uiManager.ShowGameUI();
         uiManager.UpdateScore(score);
         uiManager.UpdateTimer(timer);
@@ -81,7 +85,8 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        StartGame();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void ReturnToMainMenu()
     {

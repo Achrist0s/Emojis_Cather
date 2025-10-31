@@ -32,7 +32,6 @@ public class UIManager : MonoBehaviour
 
         originalScale = gameOverText.transform.localScale;
 
-        // Початково приховуємо UI
         scoreText.gameObject.SetActive(true);
         timerText.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(false);

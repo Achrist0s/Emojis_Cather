@@ -53,6 +53,7 @@ public class PauseMenuManager : MonoBehaviour
 
     public void ResumeGame()
     {
+   
         isPaused = false;
         Time.timeScale = 1f;
         HidePauseMenu();
@@ -106,4 +107,13 @@ public class PauseMenuManager : MonoBehaviour
             AudioManager.Instance.sfxSource.mute = !soundToggle.isOn;
         }
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPaused) ResumeGame();
+            else PauseGame();
+        }
+    }
+
 }

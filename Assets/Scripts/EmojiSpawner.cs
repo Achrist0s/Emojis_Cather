@@ -32,12 +32,25 @@ public class EmojiSpawner : MonoBehaviour
 
     void SpawnEmoji()
     {
-        float randomX = Random.Range(-2.5f, 2.5f);
-        Vector2 spawnPos = new Vector2(randomX, 6f);
+        Camera cam = Camera.main;
+
+        float minX = cam.ViewportToWorldPoint(new Vector3(0f, 0f, 0f)).x;
+        float maxX = cam.ViewportToWorldPoint(new Vector3(1f, 0f, 0f)).x;
+        float spawnY = cam.ViewportToWorldPoint(new Vector3(0f, 1f, 0f)).y + 1f;
+
+        float screenWidth = maxX - minX;
+        float emojiSize = screenWidth * 0.018f;
+        float halfSize = emojiSize / 2f;
+
+        float spawnMinX = minX + halfSize;
+        float spawnMaxX = maxX - halfSize;
+
+        float randomX = Random.Range(spawnMinX, spawnMaxX);
+        Vector2 spawnPos = new Vector2(randomX, spawnY);
 
         GameObject emoji = ObjectPool.Instance.Get(emojiPrefab);
         emoji.transform.position = spawnPos;
-        emoji.transform.localScale = Vector3.one * 0.1f;
+        emoji.transform.localScale = Vector3.one * emojiSize;
 
         SpriteRenderer sr = emoji.GetComponent<SpriteRenderer>();
         sr.sprite = emojiSprites[Random.Range(0, emojiSprites.Length)];

@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: e567a8ea4f67063468ec27bb0ad1a430
+guid: 37781062bb313444db9611186a08c7a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7249936920763604775
-    second: "\u0417\u043D\u0456\u043C\u043E\u043A \u0435\u043A\u0440\u0430\u043D\u0430
-      2025-10-29 132217_0"
+      213: 6507854729093508905
+    second: IconEmoji (2)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -76,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -127,14 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u0417\u043D\u0456\u043C\u043E\u043A \u0435\u043A\u0440\u0430\u043D\u0430
-        2025-10-29 132217_0"
+      name: IconEmoji (2)_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 305
-        height: 540
+        x: 93
+        y: 94
+        width: 837
+        height: 837
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9d065e948cc036b90800000000000000
-      internalID: -7249936920763604775
+      spriteID: 92fe671656b805a50800000000000000
+      internalID: 6507854729093508905
       vertices: []
       indices: 
       edges: []
@@ -163,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u0417\u043D\u0456\u043C\u043E\u043A \u0435\u043A\u0440\u0430\u043D\u0430 2025-10-29 132217_0": -7249936920763604775
+      IconEmoji (2)_0: 6507854729093508905
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

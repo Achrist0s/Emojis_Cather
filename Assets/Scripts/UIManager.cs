@@ -20,11 +20,19 @@ public class UIManager : MonoBehaviour
     private CanvasGroup gameOverGroup;
     private Vector3 originalScale;
 
-
     void Start()
     {
         if (restartButton != null)
+        {
+            restartButton.onClick.RemoveAllListeners();
             restartButton.onClick.AddListener(() => GameManager.Instance.RestartGame());
+        }
+
+        if (mainMenuButton != null)
+        {
+            mainMenuButton.onClick.RemoveAllListeners();
+            mainMenuButton.onClick.AddListener(() => GameManager.Instance.ReturnToMainMenu());
+        }
 
         gameOverGroup = gameOverText.gameObject.GetComponent<CanvasGroup>();
         if (gameOverGroup == null)

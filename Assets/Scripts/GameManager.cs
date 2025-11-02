@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,19 +17,18 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
     }
 
     void Start()
     {
+        StartCoroutine(InitializeGame());
+    }
+
+    IEnumerator InitializeGame()
+    {
+        yield return null;
+
         uiManager = FindFirstObjectByType<UIManager>();
         if (uiManager != null)
         {
@@ -57,10 +57,8 @@ public class GameManager : MonoBehaviour
         IsGameActive = true;
         timer = gameTime;
         score = 0;
-        uiManager.ShowGameUI();
         uiManager.UpdateScore(score);
         uiManager.UpdateTimer(timer);
-
         AudioManager.Instance.PlayMusic(AudioManager.Instance.backgroundMusic);
     }
 
@@ -68,18 +66,14 @@ public class GameManager : MonoBehaviour
     {
         IsGameActive = false;
         uiManager.ShowGameOver(score);
-        Debug.Log("Game over!");
-
         AudioManager.Instance.StopMusic(1f);
     }
 
     public void AddScore(int amount)
     {
         if (!IsGameActive) return;
-
         score += amount;
         uiManager.UpdateScore(score);
-
         AudioManager.Instance.PlayCollect();
     }
 
@@ -88,8 +82,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
     public void ReturnToMainMenu()
     {
+        Debug.Log("Returning to Main Menu...");
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }

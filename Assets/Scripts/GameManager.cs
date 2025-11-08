@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Settings")]
     public bool IsGameActive { get; private set; } = false;
     public float gameTime = 120f;
+
     private float timer;
     private int score;
     public int CurrentScore => score;
@@ -17,18 +18,17 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
     }
 
     void Start()
     {
-        StartCoroutine(InitializeGame());
-    }
-
-    IEnumerator InitializeGame()
-    {
-        yield return null;
-
         uiManager = FindFirstObjectByType<UIManager>();
         if (uiManager != null)
         {
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     {
         if (!IsGameActive) return;
 
-        timer -= Time.deltaTime;
+        timer -= Time.unscaledDeltaTime;
         uiManager.UpdateTimer(timer);
 
         if (timer <= 0)
@@ -67,6 +67,8 @@ public class GameManager : MonoBehaviour
         IsGameActive = false;
         uiManager.ShowGameOver(score);
         AudioManager.Instance.StopMusic(1f);
+
+        ObjectPool.Instance.DeactivateAll();
     }
 
     public void AddScore(int amount)
@@ -80,13 +82,15 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ReturnToMainMenu()
     {
-        Debug.Log("Returning to Main Menu...");
         Time.timeScale = 1f;
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.StopMusic(0.5f);
+
         SceneManager.LoadScene("MainMenu");
     }
 }

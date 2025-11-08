@@ -82,6 +82,9 @@ public class PauseMenuManager : MonoBehaviour
     private void ReturnToMainMenu()
     {
         Time.timeScale = 1f;
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.StopMusic(0.5f);
+
         SceneManager.LoadScene("MainMenu");
     }
 

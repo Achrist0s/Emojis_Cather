@@ -16,13 +16,13 @@ public class Emoji : MonoBehaviour
         rotationDirection = Random.value < 0.5f ? 1f : -1f;
     }
 
-    void Update()
+    void FixedUpdate() 
     {
         if (!GameManager.Instance.IsGameActive) return;
 
-        transform.Translate(Vector3.down * fallSpeed * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.down * fallSpeed * Time.fixedDeltaTime, Space.World);
 
-        transform.Rotate(0f, 0f, rotationDirection * rotationSpeed * Time.deltaTime, Space.Self);
+        transform.Rotate(0f, 0f, rotationDirection * rotationSpeed * Time.fixedDeltaTime, Space.Self);
 
         if (transform.position.y < -7f)
             gameObject.SetActive(false);
@@ -30,6 +30,8 @@ public class Emoji : MonoBehaviour
 
     public void Collect()
     {
+        if (PauseMenuManager.Instance != null && PauseMenuManager.Instance.isPaused)
+            return;
         if (collected) return;
         collected = true;
         AudioManager.Instance.PlayClick();

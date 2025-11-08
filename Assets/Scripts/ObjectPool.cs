@@ -42,6 +42,17 @@ public class ObjectPool : MonoBehaviour
             pool[prefab] = new Queue<GameObject>();
         pool[prefab].Enqueue(obj);
     }
+    public void DeactivateAll()
+    {
+        foreach (var kvp in pool)
+        {
+            foreach (var obj in kvp.Value)
+            {
+                if (obj != null && obj.activeInHierarchy)
+                    obj.SetActive(false);
+            }
+        }
+    }
 }
 
 public class ReturnAfterEffect : MonoBehaviour
